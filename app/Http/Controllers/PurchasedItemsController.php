@@ -11,6 +11,16 @@ use Illuminate\Http\Request;
 
 class PurchasedItemsController extends Controller
 {
+
+
+    public function index(){
+
+        $id = Auth::id();
+        $products = PurchasedItems::all();
+    
+        return view('products.purchaseditems', compact('products', 'id'));
+    }
+
     static function store(){
 
         $carts = Cart::all();

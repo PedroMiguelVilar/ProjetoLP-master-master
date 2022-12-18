@@ -3,9 +3,11 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PurchasedItemsController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\Search;
 use App\Models\Product;
+use App\Models\PurchasedItems;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +51,9 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.addproduct');
     Route::get('/cart/show', [CartController::class, 'showcart'])->name('cart.show');
     Route::delete('/cart/{cart}', [CartController::class, 'deletecartproducts'])->name('cartproduct.destroy');
+
+    
+    Route::get('/purchaseditems', [PurchasedItemsController::class, 'index'])->name('purchaseditems');
 
     Route::controller(StripePaymentController::class)->group(function(){
         Route::get('stripe', 'stripe');

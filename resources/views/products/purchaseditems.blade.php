@@ -17,25 +17,16 @@
         <th>Category</th>
         <th>Quantity</th>
         <th>Price</th>
-        <th>Actions</th>
     </tr>
     
     @forelse ($products as $product)
     @if ($product->user->id == $id)  
     <tr>
-        <td><a href="/showproducts/{{$product->id}}">{{$product->name}}</a></td>
-        <td>{{$product->description}}</td>
-        <td>{{$product->category}}</td>
+        <td><a href="/showproducts/{{$product->product_id}}">{{$product->product->name}}</a></td>
+        <td>{{$product->product->description}}</td>
+        <td>{{$product->product->category}}</td>
         <td>{{$product->quantity}}</td>
-        <td>{{$product->price}} €</td>
-        <td>
-        <form action="{{ route('myproducts.destroy',$product->id) }}" method="POST">
-            <a class="btn btn-primary" href="{{ route('myproducts.edit',$product->id) }}">Edit</a>
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
-        </td>
+        <td>{{$product->product->price}} €</td>
     @endif
     </tr>
     

@@ -28,7 +28,7 @@
         <td>{{$product->user->id}}</td>
         <td>{{$product->user->name}}</td>
         <td>{{$product->id}}</td>
-        <td>{{$product->name}}</td>
+        <td><a href="/showproducts/{{$product->id}}">{{$product->name}}</a></td>
         <td>{{$product->description}}</td>
         <td>{{$product->category}}</td>
         <td>{{$product->quantity}}</td>
