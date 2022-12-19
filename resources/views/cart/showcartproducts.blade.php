@@ -29,6 +29,9 @@
         @endfor
     @endif
     @endforeach
+    @if($carts->isEmpty())
+    <h5 class="text-center">Your cart is empty!</h5>
+    @endif
     @if(!$carts->isEmpty())
     <a class="button" target="_blank" rel="noopener noreferrer" href="/stripe/">Purchase</a>
     @endif

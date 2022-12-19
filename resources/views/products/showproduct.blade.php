@@ -38,7 +38,7 @@
                     <form class="add-inputs" action = "/cart/add" method="POST">
                         @csrf
                         <input name="product_id" type="hidden" value="{{$product->id}}"></input>
-                        <input type="number" class="form-control" id="cart_quantity" name="cart_quantity" value="1" min="1" max="10">
+                        <input type="number" class="form-control" id="cart_quantity" name="cart_quantity" value="1" min="1" max={{$product->quantity}}>
                         <button name="add_to_cart" type="submit" class="btn btn-primary btn-lg">Add to cart</button>
                     </form>
                     <form class="add-inputs" method="post">

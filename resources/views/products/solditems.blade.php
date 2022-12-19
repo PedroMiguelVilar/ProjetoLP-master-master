@@ -13,22 +13,18 @@
     <style>h5 {color: #ffffff;}th {color: #ffffff;}td {color: #ffffff;}</style>
     <tr>
         <th>Product Name</th>
-        <th>Description</th>
-        <th>Category</th>
-        <th>Price</th>
+        <th>Sold To</th>
+        <th>Shipped</th>
     </tr>
     
     @foreach ($products as $product)
-    @if ($product->user->id == $id)  
+    @if ($product->product->user->id == $id)  
     <tr>
-        <td><a href="/showproducts/{{$product->product_id}}">{{$product->product->name}}</a></td>
-        <td>{{$product->product->description}}</td>
-        <td>{{$product->product->category}}</td>
-        <td>{{$product->product->price}} €</td>
+        <td><a href="/showproducts/{{$product->product->product_id}}">{{$product->product->name}}</a></td>
+        <td>{{$product->user->name}}</td>
+        <td></td>
     @endif
     </tr>
-    
-   
     @endforeach
 </table>
 

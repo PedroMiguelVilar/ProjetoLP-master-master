@@ -37,8 +37,11 @@ class StripePaymentController extends Controller
       
         Session::flash('success', 'Payment successful! You can go close this page now.');
 
+
         PurchasedItemsController::store();
+        ProductController::products_sold();
         CartController::deletecart();
+
         return back();
     }
 }

@@ -25,17 +25,13 @@ class PurchasedItemsController extends Controller
 
         $carts = Cart::all();
         $id = Auth::user()->id;
-        
-        $purchased = new PurchasedItems;
 
         foreach($carts as $cart){
+            $purchased = new PurchasedItems;
             if($cart->user_id == $id){
-                for($i=0; $i < $cart->quantity; $i++){
-                    $purchased->user_id = $cart->user_id;
-                    $purchased->product_id = $cart->product_id;
-                    $purchased->quantity = $cart->quantity;
-                    $purchased->save(); 
-                }
+                $purchased->user_id = $cart->user_id;
+                $purchased->product_id = $cart->product_id;
+                $purchased->save();
             }
         }
 

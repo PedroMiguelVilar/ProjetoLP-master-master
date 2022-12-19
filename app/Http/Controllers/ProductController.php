@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
+
 class ProductController extends Controller
 {
     /**
@@ -102,6 +104,27 @@ class ProductController extends Controller
     {
         $product->update($request->all());
         return redirect('myproducts');
+    }
+
+    static function products_sold(){
+
+        $id = Auth::id();
+        $carts = Cart::all();
+        $products = Product::all();
+
+        foreach($carts as $cart)
+            if ($id == $cart->user_id) {
+                foreach($products as $product){
+                    if($product->id == $cart->product_id){
+                        if($product->quantity > 1){
+                            $product->quantity-=$cart->quantity;
+                            $product->update();
+                        }else if($product->quantity==1){
+                            $product->delete();
+                        }
+                    }
+                }   
+            }
     }
 
 }

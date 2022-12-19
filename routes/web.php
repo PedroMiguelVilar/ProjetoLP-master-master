@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PurchasedItemsController;
 use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\SoldItemsController;
 use App\Http\Controllers\Search;
 use App\Models\Product;
 use App\Models\PurchasedItems;
@@ -54,6 +55,8 @@ Route::middleware(['auth'])->group(function() {
 
     
     Route::get('/purchaseditems', [PurchasedItemsController::class, 'index'])->name('purchaseditems');
+    
+    Route::get('/solditems', [SoldItemsController::class, 'index'])->name('solditems');
 
     Route::controller(StripePaymentController::class)->group(function(){
         Route::get('stripe', 'stripe');

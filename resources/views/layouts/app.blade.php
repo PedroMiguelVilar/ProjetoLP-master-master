@@ -114,7 +114,8 @@ $total=CartController::cartItem();
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" class ="container" href="{{ route('purchaseditems') }}"> My Orders </a>
-                                    <a class="dropdown-item" class ="container" href="{{ route('myproducts') }}"> Sells </a>
+                                    <a class="dropdown-item" class ="container" href="{{ route('myproducts') }}"> My Ads </a>
+                                    <a class="dropdown-item" class ="container" href="{{ route('solditems') }}"> My Sells </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
