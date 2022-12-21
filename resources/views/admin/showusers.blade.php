@@ -16,6 +16,7 @@
         <th>User Name:</th>
         <th>User Id</th>
         <th>User role</th>
+        <th>Banned</th>
         <th>Actions</th>
 
     </tr>
@@ -24,21 +25,21 @@
         <td>{{$user->name}}</td>
         <td>{{$user->id}}</td>
         <td>{{$user->role}}</td>
-        
+        <td>{{$user->status}}</td>
+        @if($user->role < 2)
         <td>
         <form action="{{ route('users.update', $user->id) }}" method="POST">
             @csrf   
             @method('PUT')
                 <button class="btn btn-primary">Upgrade</button>
-                <input input type="number" min="0" max="1" class="@error('name') is-invalid @enderror"name="role" value="{{$user->role}}" required autocomplete="name" autofocus>
-        </form>
-        <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger">Delete</button>
+                <input input type="number" min="0" max="1" class="@error('name') is-invalid @enderror"name="role" value="{{$user->role}}"  autofocus>
+            @csrf   
+            @method('PUT')
+                <button class="btn btn-primary">Banned</button>
+                <input input type="number" min="0" max="1" class="@error('name') is-invalid @enderror"name="status" value="{{$user->status}}"  autofocus>
         </form>
         </td>
- 
+        @endif
     </tr>
     @empty
     <h5 class="text-center">No users Found!</h5>

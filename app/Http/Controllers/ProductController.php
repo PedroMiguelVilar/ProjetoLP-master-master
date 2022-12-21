@@ -119,8 +119,6 @@ class ProductController extends Controller
                         if($product->quantity > 1){
                             $product->quantity-=$cart->quantity;
                             $product->update();
-                        }else if($product->quantity==1){
-                            $product->delete();
                         }
                     }
                 }   

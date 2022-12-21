@@ -25,6 +25,7 @@
         <div class="testimonials">
             {{$i=1}}
             @foreach ($products_carousel as $item)
+            @if($item->hide == 'no')
                 <label class="item" for="t-{{$i}}">
                     <img src="{{$item['product_url']}}" alt="picture">
                     <h3>{{ $item['name'] }}</h3>
@@ -35,6 +36,7 @@
             @if($i>5){
                 {{$i=1}}
             }@endif
+            @endif
             @endforeach
         </div>
     </div>
@@ -52,6 +54,7 @@
     <div id="wrap">
         <div id="columns" class="columns_4">  
         @foreach ($products as $item)
+        @if($item->hide == 'no')
         <figure>  
              <label class="item" for="t-{{$item['id']}}">
                 <img src="{{$item['product_url']}}" alt="picture">
@@ -60,6 +63,7 @@
                 <a class="button" href="/showproducts/{{$item->id}}">Buy Now!</a>
              </label>
             </figure>
+        @endif
         @endforeach
     </div>
 

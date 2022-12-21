@@ -1,8 +1,3 @@
-
-
-
-
-
 <!DOCTYPE html>
 <!-- saved from url=(0022)http://127.0.0.1:8000/ -->
 @extends('layouts.app')
@@ -20,7 +15,7 @@
 </head>
 <style>* { box-sizing: border-box; } .details-card { width: 80%; margin: auto; } .description-container { position: relative; /* height: 900px; */ } .main-description1 { position: absolute; top: 50%; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); } .main-description h3 { font-size: 2rem; } .add-inputs, .add-inputs input { float: left; margin-right: 10px; margin-bottom: 2px; } .add-inputs button { border-radius: 0; } .add-inputs input { height: 48px; width: 65px; border-radius: 0; } .product-title { font-size: 1.1rem; font-weight: bold; } .product-price { font-size: 1.8rem; } .social-list { padding: 0; list-style: none; } .social-list li { float: left; padding: 6px 8px; margin-right: 12px; } .social-list li a { color: black; font-size: 2rem; } .social-list li a i { font-size: 2rem; }</style>
 @section('content')
-
+@if($product->hide == 'no')
 <div class="container my-5">
 
     <div class="card details-card p-0">
@@ -60,7 +55,7 @@
         </div>
         <!-- End row -->
     </div>
-
+@endif
 
 @endsection
 
