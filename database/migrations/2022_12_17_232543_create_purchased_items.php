@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
+            $table->boolean('shipped')->default('false');
             $table->timestamps();
             
             $table->foreign('user_id')

@@ -16,6 +16,7 @@
         <th>Description</th>
         <th>Category</th>
         <th>Price</th>
+        <th>Shipped</th>
     </tr>
     
     @foreach ($products as $product)
@@ -25,6 +26,11 @@
         <td>{{$product->product->description}}</td>
         <td>{{$product->product->category}}</td>
         <td>{{$product->product->price}} €</td>
+        @if($product->shipped == false)
+        <td>No</td>
+        @else
+        <td>Yes</td>
+        @endif
     @endif
     </tr>
     

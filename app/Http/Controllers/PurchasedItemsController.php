@@ -27,11 +27,13 @@ class PurchasedItemsController extends Controller
         $id = Auth::user()->id;
 
         foreach($carts as $cart){
-            $purchased = new PurchasedItems;
             if($cart->user_id == $id){
+                for($i=0; $i < $cart->quantity; $i++){
+                $purchased = new PurchasedItems;
                 $purchased->user_id = $cart->user_id;
                 $purchased->product_id = $cart->product_id;
                 $purchased->save();
+            }
             }
         }
 

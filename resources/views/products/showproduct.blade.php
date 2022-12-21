@@ -38,9 +38,13 @@
                     <form class="add-inputs" action = "/cart/add" method="POST">
                         @csrf
                         <input name="product_id" type="hidden" value="{{$product->id}}"></input>
+                        @if($product->quantity !=0)
                         <input type="number" class="form-control" id="cart_quantity" name="cart_quantity" value="1" min="1" max={{$product->quantity}}>
                         <button name="add_to_cart" type="submit" class="btn btn-primary btn-lg">Add to cart</button>
                     </form>
+                        @else
+                        <a name="add_to_cart" type="submit" class="btn btn-primary btn-lg">Without Stock</a>
+                        @endif
                     <form class="add-inputs" method="post">
                         <button name="add_to_cart" type="submit" class="btn btn-primary btn-lg">Add to Wishlist</button>
                     </form>

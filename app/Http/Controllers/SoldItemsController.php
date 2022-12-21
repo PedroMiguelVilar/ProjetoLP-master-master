@@ -16,4 +16,11 @@ class SoldItemsController extends Controller
 
         return view('products.solditems', compact('products', 'id'));
     }
+
+    public function shipped(Request $request, PurchasedItems $purchasedItems)
+    {
+        $purchasedItems->update($request->all());
+        return redirect('/solditems');
+    }
+
 }
