@@ -18,19 +18,22 @@
     </tr>
     
     @foreach ($products as $product)
-    @if ($product->product->user->id == $id)  
+    @if ($product->product->user->id == $id)
+   
     <tr>
         <td><a href="/showproducts/{{$product->product->id}}">{{$product->product->name}}</a></td>
         <td>{{$product->user->name}}</td>
+        @if($product->shipped == 0)
         <td>
-            
-            <form action="{{ route('shipped', $product->id) }}" method="POST">
-            @csrf   
-            @method('PUT')
-            <input type="checkbox" id="shipped" value="true">
-            <button type = "submit" class="btn btn-primary">{{$product->shipped}}</button>
+            <form action="{{route('shipped', $product->id) }}" method="POST">
+                @csrf   
+                @method('PUT')
+                    <button class="btn btn-primary">Shipped</button>
+                    <input type = "hidden" name = "id" value = "{{$product->id}}">
+                    <input type = "hidden" name = "shipped" value = 1>
             </form>
         </td>
+        @endif
     @endif
     </tr>
     @endforeach

@@ -26,10 +26,22 @@
         <td>{{$product->product->description}}</td>
         <td>{{$product->product->category}}</td>
         <td>{{$product->product->price}} €</td>
-        @if($product->shipped == false)
+        @if($product->shipped == 0)
         <td>No</td>
-        @else
-        <td>Yes</td>
+        @elseif($product->shipped == 1 && $product->received == 'no')
+        <td>
+            Yes
+            <form action="{{route('received', $product->id) }}" method="POST">
+                @csrf   
+                @method('PUT')
+                    <button class="btn btn-primary">Received</button>
+                    <input type = "hidden" name = "id" value = "{{$product->id}}">
+                    <input type = "hidden" name = "received" value = yes>
+            </form>
+        </td>
+        @elseif($product->shipped == 1 && $product->received == 'yes')
+        <td>Product Received at {{$product->updated_at}}</td>
+
         @endif
     @endif
     </tr>

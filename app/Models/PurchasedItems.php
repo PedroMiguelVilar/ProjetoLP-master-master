@@ -9,6 +9,10 @@ class PurchasedItems extends Model
 {
     use HasFactory;
 
+    public $table = "purchased_items";
+    protected $fillable = [
+        'user_id', 'product_id', 'shipped', 'received', 'updated_at'
+      ];
 
     public function product()
     {

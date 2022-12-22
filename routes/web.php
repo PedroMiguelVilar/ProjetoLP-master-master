@@ -55,10 +55,10 @@ Route::middleware(['auth'])->group(function() {
 
     
     Route::get('/purchaseditems', [PurchasedItemsController::class, 'index'])->name('purchaseditems');
+    Route::put('/purchasedItems/{product}', [PurchasedItemsController::class, 'received'])->name('received');
     
     Route::get('/solditems', [SoldItemsController::class, 'index'])->name('solditems');
-
-    Route::put('/shipped/{product}', [SoldItemsController::class, 'shipped'])->name('shipped');
+    Route::put('/solditems/{product}', [SoldItemsController::class, 'shipped'])->name('shipped');
 
     Route::controller(StripePaymentController::class)->group(function(){
         Route::get('stripe', 'stripe');

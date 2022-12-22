@@ -38,4 +38,17 @@ class PurchasedItemsController extends Controller
         }
 
     }
+ 
+    public function received(Request $request, PurchasedItems $purchasedItems)
+    {
+        $purchasedItems = PurchasedItems::all();
+        foreach($purchasedItems as $purchasedItem){
+            if($purchasedItem->id == $request->id){
+                $purchasedItem->received=$request->received;
+                $purchasedItem->update();
+            }
+        }
+        return redirect('/purchaseditems');
+    }
+
 }

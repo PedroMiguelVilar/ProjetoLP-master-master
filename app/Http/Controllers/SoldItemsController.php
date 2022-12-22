@@ -19,7 +19,13 @@ class SoldItemsController extends Controller
 
     public function shipped(Request $request, PurchasedItems $purchasedItems)
     {
-        $purchasedItems->update($request->all());
+        $purchasedItems = PurchasedItems::all();
+        foreach($purchasedItems as $purchasedItem){
+            if($purchasedItem->id == $request->id){
+                $purchasedItem->shipped=$request->shipped;
+                $purchasedItem->update();
+            }
+        }
         return redirect('/solditems');
     }
 
