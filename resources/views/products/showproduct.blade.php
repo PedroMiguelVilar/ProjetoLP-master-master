@@ -1,3 +1,9 @@
+<?php
+use App\Http\Controllers\WishlistController;
+
+$wishlist=WishlistController::WishlistStatus();
+?>
+
 <!DOCTYPE html>
 <!-- saved from url=(0022)http://127.0.0.1:8000/ -->
 @extends('layouts.app')
@@ -30,19 +36,38 @@
                     <h3>{{$product->name}}</h3>
                     <hr>
                     <p class="product-price">{{$product->price}}€</p>
-                    <form class="add-inputs" action = "/cart/add" method="POST">
-                        @csrf
-                        <input name="product_id" type="hidden" value="{{$product->id}}"></input>
-                        @if($product->quantity !=0)
-                        <input type="number" class="form-control" id="cart_quantity" name="cart_quantity" value="1" min="1" max={{$product->quantity}}>
-                        <button name="add_to_cart" type="submit" class="btn btn-primary btn-lg">Add to cart</button>
-                    </form>
+                    @if($product->quantity !=0)
+                        <form class="add-inputs" action = "/cart/add" method="POST">
+                            @csrf
+                            <input name="product_id" type="hidden" value="{{$product->id}}">
+                            <input type="number" class="form-control" id="cart_quantity" name="cart_quantity" value="1" min="1" max={{$product->quantity}}>
+                            <button name="add_to_cart" type="submit" class="btn btn-primary btn-lg">Add to cart</button>
+                        </form>
                         @else
                         <a name="add_to_cart" type="submit" class="btn btn-primary btn-lg">Without Stock</a>
                         @endif
-                    <form class="add-inputs" method="post">
-                        <button name="add_to_cart" type="submit" class="btn btn-primary btn-lg">Add to Wishlist</button>
-                    </form>
+
+                       <?php
+                        $i=1
+                       ?>
+                    @foreach($wishlist as $item) 
+                    @if($item->user_id == Auth::user()->id && $item->product_id == $product->id)
+                        <a name="add_to_wishlist" type="submit" class="btn btn-primary btn-lg">Already Added</a>
+                        <?php
+                        $i=0
+                        ?>
+                    @endif
+                    @endforeach
+
+                    @if($i == 1)
+                        <form class="add-inputs" action = "/wishlist/add" method="POST">
+                            @csrf
+                            <input name="product_id" type="hidden" value="{{$product->id}}">
+                            <input type="hidden" class="form-control" id="status" name="status" value="1">
+                            <button name="add_to_wishlist" type="submit" class="btn btn-primary btn-lg">Add to Wishlist</button>
+                        </form>
+                    @endif
+
                     <div style="clear:both"></div>
                     <hr>
                     <p class="product-title mt-4 mb-1">About this product</p>

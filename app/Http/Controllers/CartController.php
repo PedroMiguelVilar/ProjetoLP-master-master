@@ -24,7 +24,6 @@ class CartController extends Controller
 
     static function cartItem()
     {
-
         if (Auth::check()) {
             $userId = Auth::user()->id;
 

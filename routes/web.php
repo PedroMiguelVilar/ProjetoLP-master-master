@@ -7,8 +7,7 @@ use App\Http\Controllers\PurchasedItemsController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\SoldItemsController;
 use App\Http\Controllers\Search;
-use App\Models\Product;
-use App\Models\PurchasedItems;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +52,9 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/cart/show', [CartController::class, 'showcart'])->name('cart.show');
     Route::delete('/cart/{cart}', [CartController::class, 'deletecartproducts'])->name('cartproduct.destroy');
 
+    Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('wishlist.addproduct');
+    Route::get('/wishlist/show', [WishlistController::class, 'showwishlist'])->name('wishlist.show');
+    Route::delete('/wishlist/{item}', [WishlistController::class, 'deletewishlistproducts'])->name('wishlistproduct.destroy');
     
     Route::get('/purchaseditems', [PurchasedItemsController::class, 'index'])->name('purchaseditems');
     Route::put('/purchasedItems/{product}', [PurchasedItemsController::class, 'received'])->name('received');
