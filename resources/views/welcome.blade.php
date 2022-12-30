@@ -33,9 +33,9 @@
                     <a class="button" href="/showproducts/{{$item->id}}">Buy Now!</a>
                 </label>
                 {{$i++}}
-            @if($i>5){
+            @if($i>5)
                 {{$i=1}}
-            }@endif
+            @endif
             @endif
             @endforeach
         </div>
@@ -57,7 +57,18 @@
         @if($item->hide == 'no')
         <figure>  
              <label class="item" for="t-{{$item['id']}}">
-                <img src="{{$item['product_url']}}" alt="picture">
+                <div hidden> {{$j=0}}</div>
+                @foreach($images as $image)
+                    @if($image->product_id == $item->id)
+                    <div hidden>{{$j=1}}</div>
+                    <div hidden>{{$image2 = $image}}</div>
+                    @endif
+                @endforeach
+                @if($j == 0)
+                    <img src="{{$item['product_url']}}" alt="picture">
+                @else
+                    <img  src="/images/{{$image2->image}}" alt="picture">
+                @endif
                 <figcaption>{{ $item['name'] }}</figcaption>
                 <span>{{ $item['price'] }}€</span>
                 <a class="button" href="/showproducts/{{$item->id}}">Buy Now!</a>

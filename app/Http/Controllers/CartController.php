@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Cart;
+use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -39,8 +40,9 @@ class CartController extends Controller
     {
 
         $carts = Cart::all();
+        $images = Image::all();
 
-        return view('cart.showcartproducts', compact('carts'));
+        return view('cart.showcartproducts', compact('carts', 'images'));
     }
 
     public function deletecartproducts(Cart $cart)

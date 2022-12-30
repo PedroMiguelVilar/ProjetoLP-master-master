@@ -15,7 +15,18 @@
     @for($i = 0; $i < $cart->quantity; $i++)
     <figure>  
          <label class="item">
-            <img src="{{ $cart->product->product_url }}" alt="picture">
+            <div hidden> {{$j=0}}</div>
+                @foreach($images as $image)
+                    @if($image->product_id == $cart->product->id)
+                    <div hidden>{{$j=1}}</div>
+                    <div hidden>{{$image2 = $image}}</div>
+                    @endif
+                @endforeach
+                @if($j == 0)
+                    <img src="{{$cart->product['product_url']}}" alt="picture">
+                @else
+                    <img  src="/images/{{$image2->image}}" alt="picture">
+                @endif
             <figcaption>{{ $cart->product->name}}</figcaption>
             <span>{{ $cart->product->price}}€</span>
             <form action="{{ route('cartproduct.destroy', $cart->id) }}" method="POST">

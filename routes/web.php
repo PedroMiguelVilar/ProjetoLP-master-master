@@ -7,6 +7,7 @@ use App\Http\Controllers\PurchasedItemsController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\SoldItemsController;
 use App\Http\Controllers\Search;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,7 @@ Route::middleware(['auth'])->group(function() {
 
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/product-images/{id}',[ProductController::class,'images'])->name('product.images');
     
     Route::get('/products/{product}/edit', [ProductController::class,'edit'])->name('products.edit')->middleware('Role_Admin');
     Route::put('/products/{product}', [ProductController::class,'update'])->name('products.update')->middleware('Role_Admin');
@@ -61,6 +63,9 @@ Route::middleware(['auth'])->group(function() {
     
     Route::get('/solditems', [SoldItemsController::class, 'index'])->name('solditems');
     Route::put('/solditems/{product}', [SoldItemsController::class, 'shipped'])->name('shipped');
+
+    Route::get('upload-ui', [FileUploadController::class, 'dropzoneUi' ]);
+    Route::post('file-upload', [FileUploadController::class, 'dropzoneFileUpload' ])->name('dropzoneFileUpload');
 
     Route::controller(StripePaymentController::class)->group(function(){
         Route::get('stripe', 'stripe');

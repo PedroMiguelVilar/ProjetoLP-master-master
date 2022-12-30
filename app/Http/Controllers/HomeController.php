@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Http\Controllers;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\User;
 
@@ -25,8 +26,9 @@ class HomeController extends Controller
     {
         $products_carousel = Product::paginate(5);
         $products = Product::paginate(8);
+        $images = Image::all();
 
-        return view('welcome', compact('products_carousel', 'products'))  ;
+        return view('welcome', compact('products_carousel', 'products', 'images'));
     }
     
 

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\User;
+use App\Models\Image;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
 
 
 class ProductController extends Controller
@@ -34,11 +32,16 @@ class ProductController extends Controller
         return view('products.create');
     }
 
-
+   /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
+        
         $id = Auth::id();
-
         $product = new Product();
         $product->user_id = $id;
         $product->name = $request->name;
@@ -48,14 +51,15 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->save();
 
-        return redirect('/products');
+        return view('dropzone-file-upload');
     }
 
 
     public function show(Product $product)
     {
+        $images = Image::all();
 
-        return view('products.showproduct', ['product' => $product]);
+        return view('products.showproduct', compact('product', 'images'));
     }
 
     public function edit(Product $product)
@@ -106,23 +110,23 @@ class ProductController extends Controller
         return redirect('myproducts');
     }
 
-    static function products_sold(){
+    static function products_sold()
+    {
 
         $id = Auth::id();
         $carts = Cart::all();
         $products = Product::all();
 
-        foreach($carts as $cart)
+        foreach ($carts as $cart)
             if ($id == $cart->user_id) {
-                foreach($products as $product){
-                    if($product->id == $cart->product_id){
-                        if($product->quantity > 1){
-                            $product->quantity-=$cart->quantity;
+                foreach ($products as $product) {
+                    if ($product->id == $cart->product_id) {
+                        if ($product->quantity > 1) {
+                            $product->quantity -= $cart->quantity;
                             $product->update();
                         }
                     }
-                }   
+                }
             }
     }
-
 }
