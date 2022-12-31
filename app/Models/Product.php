@@ -13,9 +13,7 @@ class Product extends Model
     protected $fillable = [
         'user_id', 'name', 'description', 'category', 'quantity', 'price', 'hide', 'received'
       ];
-    public function images(){
-        return $this->hasMany(Image::class);
-    }
+      
     public function user()
     {
       return $this->belongsTo(User::class, 'user_id', 'id');

@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use \App\Http\Controllers;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\PurchasedItems;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -24,13 +26,25 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $products_carousel = Product::paginate(5);
+
+        $purchased_items  = DB::table('purchased_items')
+            ->select('product_id')
+            ->groupBy('product_id')
+            ->orderByRaw('COUNT(*) DESC')
+            ->limit(5)
+            ->get();
+        
+
         $products = Product::paginate(8);
         $images = Image::all();
 
-        return view('welcome', compact('products_carousel', 'products', 'images'));
+        $all_products = Product::all();
+
+        return view('welcome', compact('products_carousel', 'products', 'images', 'purchased_items', 'all_products'));
     }
-    
+
 
     public function staffHome()
     {
@@ -52,7 +66,4 @@ class HomeController extends Controller
         $user->delete();
         return redirect('/users');
     }
-
-    
-
 }
