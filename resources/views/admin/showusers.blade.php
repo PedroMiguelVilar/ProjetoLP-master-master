@@ -31,13 +31,31 @@
         <form action="{{ route('users.update', $user->id) }}" method="POST">
             @csrf   
             @method('PUT')
+            @if($user->role == 1)
+                <button class="btn btn-primary">Downgrade</button>
+                <input type = "hidden" name = "id" value = "{{$user->role}}">
+                <input type = "hidden" name = "role" value = 0>
+            @endif
+            @if($user->role == 0)
                 <button class="btn btn-primary">Upgrade</button>
-                <input input type="number" min="0" max="1" class="@error('name') is-invalid @enderror"name="role" value="{{$user->role}}"  autofocus>
+                <input type = "hidden" name = "id" value = "{{$user->role}}">
+                <input type = "hidden" name = "role" value = 1>
+            @endif
             @csrf   
             @method('PUT')
-                <button class="btn btn-primary">Banned</button>
-                <input input type="number" min="0" max="1" class="@error('name') is-invalid @enderror"name="status" value="{{$user->status}}"  autofocus>
+            @if($user->status == 1)
+                <button class="btn btn-danger">Unban</button>
+                <input type = "hidden" name = "id" value = "{{$user->status}}">
+                <input type = "hidden" name = "status" value = 0>
+            @endif
+            @if($user->status == 0)
+                <button class="btn btn-danger">Ban</button>
+                <input type = "hidden" name = "id" value = "{{$user->status}}">
+                <input type = "hidden" name = "status" value = 1>
+            @endif
         </form>
+
+        
         </td>
         @endif
     </tr>
