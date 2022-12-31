@@ -35,4 +35,17 @@ class FileUploadController extends Controller
         $image->save();
         return response()->json(['success'=>$imageName]);
     }
+
+    public function imagedestroy(Request $request){
+
+        $images = Image::all();
+
+        foreach($images as $image){
+            if($image->id == $request->id){
+                $image->delete();
+            }
+        }
+        
+        return redirect('products');
+    }
 }

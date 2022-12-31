@@ -64,6 +64,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+
         return view('products.edit', ['product' => $product]);
     }
 
@@ -71,15 +72,13 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $product->update($request->all());
-        return redirect('/products');
+        $images = Image::all();
+
+        return view('editimages', compact('product', 'images'));
     }
 
 
-    public function destroy(Product $product)
-    {
-        $product->delete();
-        return redirect('/products');
-    }
+    
 
     public function myproducts(Product $product)
     {
@@ -107,7 +106,12 @@ class ProductController extends Controller
     public function updatemyproducts(Request $request, Product $product)
     {
         $product->update($request->all());
-        return redirect('myproducts');
+        $images = Image::all();
+        $id = Auth::id();
+        if ($id == $product->user->id) {
+            return view('products.myproductsimages', compact('product', 'images'));
+        }
+        
     }
 
     static function products_sold()

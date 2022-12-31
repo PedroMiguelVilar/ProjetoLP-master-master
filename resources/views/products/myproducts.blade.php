@@ -31,9 +31,7 @@
         <td>{{$product->quantity}}</td>
         <td>{{$product->price}} €</td>
         <td>
-        <form action="{{ route('myproducts.destroy',$product->id) }}" method="POST">
             <a class="btn btn-primary" href="{{ route('myproducts.edit',$product->id) }}">Edit</a>
-        </form>
         </td>
     @endif
     </tr>
