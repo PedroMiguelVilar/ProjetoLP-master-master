@@ -35,12 +35,15 @@ class HomeController extends Controller
             ->orderByRaw('COUNT(*) DESC')
             ->limit(5)
             ->get();
+
         
 
         $products = Product::paginate(8);
         $images = Image::all();
 
         $all_products = Product::all();
+
+
 
         return view('welcome', compact('products_carousel', 'products', 'images', 'purchased_items', 'all_products'));
     }

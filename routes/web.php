@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function() {
     Route::post('file-upload', [FileUploadController::class, 'dropzoneFileUpload' ])->name('dropzoneFileUpload');
 
 
+    Route::put('/showproducts/category/{category}', [ProductController::class,'showcategory'])->name('productscategory.show');
+
     Route::controller(StripePaymentController::class)->group(function(){
         Route::get('stripe', 'stripe');
         Route::post('stripe', 'stripePost')->name('stripe.post');

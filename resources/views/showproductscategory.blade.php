@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -10,7 +11,7 @@
 
 <div id="wrap">
     <div id="columns" class="columns_4">  
-    @foreach ($products as $item)
+    @foreach ($product_category as $item)
     <figure>  
          <label class="item">
             <div hidden> {{$k = 0}}</div>

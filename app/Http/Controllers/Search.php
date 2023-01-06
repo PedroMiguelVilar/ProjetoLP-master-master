@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -36,7 +37,9 @@ class Search extends Controller
 
     
     public function searchpage(Request $request){
-        $data = DB::table('products')->where('name', 'LIKE', '%' . $request->search . "%")->get();
-        return view('searchproducts', ['products'=>$data]);
+        $products = DB::table('products')->where('name', 'LIKE', '%' . $request->search . "%")->get();
+        $images = Image::all();
+        
+        return view('searchproducts', compact('products', 'images'));
     }
 }

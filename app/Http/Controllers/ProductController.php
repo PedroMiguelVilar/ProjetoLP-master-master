@@ -62,6 +62,23 @@ class ProductController extends Controller
         return view('products.showproduct', compact('product', 'images'));
     }
 
+    public function showcategory(Request $request)
+    {
+        
+        $products = Product::all();
+        $images = Image::all();
+
+        $product_category = array();
+
+        foreach($products as $product){
+            if($product->category == $request->category){
+                array_push($product_category, $product);
+            }
+        }
+
+        return view('showproductscategory', compact('product_category', 'images'));
+    }
+
     public function edit(Product $product)
     {
 

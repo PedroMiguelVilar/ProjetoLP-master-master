@@ -9,6 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Styles -->
     <style>
+
+        h1 {
+            color: white
+        }
+
         body {
             background: #212534;
         }
@@ -284,6 +289,7 @@
 </style>
 
 @section('content')
+    <h1><p style="text-align:center">Best Sellers</p></h1>
     <div class="slider">
         <input type="radio" name="testimonial" id="t-1">
         <input type="radio" name="testimonial" id="t-2">
@@ -324,6 +330,7 @@
 
 
             @if ($purchased_items->count() >= 5)
+            
                 {{ $i = 1 }}
                 @foreach ($purchased_items as $item)
                     @foreach ($all_products as $product)
@@ -401,4 +408,61 @@
 
 
         {!! $products->links('pagination::bootstrap-5') !!}
-    @endsection
+
+        <h1> Explore Popular Categories </h1>
+
+        <div id="wrap">
+            
+            <div id="columns" class="columns_4">
+                <figure>
+                    <label class="item" >
+                        <img src="https://cdn-icons-png.flaticon.com/512/1480/1480643.png" alt="picture">
+                        <figcaption>Automoveis</figcaption>
+                        <form action="{{route('productscategory.show', 'automoveis')}}" method="POST">
+                            @csrf   
+                            @method('PUT')
+                            <button class="btn btn-primary" >Buy Now</button>
+                            <input type="hidden" name ="category" value = "automoveis">
+                        </form>
+                    </label>
+                </figure>
+                <figure>
+                    <label class="item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3556/3556556.png" alt="picture">
+                        <figcaption>Eletronicos</figcaption>
+                        <form action="{{route('productscategory.show', 'eletronicos')}}" method="POST">
+                            @csrf   
+                            @method('PUT')
+                            <button class="btn btn-primary" >Buy Now</button>
+                            <input type="hidden" name ="category" value = "eletronicos">
+                        </form>
+                    </label>
+                </figure>
+                <figure>
+                    <label class="item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1606/1606789.png" alt="picture">
+                        <figcaption>Brinquedos</figcaption>
+                        <form action="{{route('productscategory.show', 'brinquedos')}}" method="POST">
+                            @csrf   
+                            @method('PUT')
+                            <button class="btn btn-primary" >Buy Now</button>
+                            <input type="hidden" name ="category" value = "brinquedos">
+                        </form>
+                    </label>
+                </figure>
+                <figure>
+                    <label class="item">
+                        <img src="https://cdn-icons-png.flaticon.com/512/7082/7082682.png" alt="picture">
+                        <figcaption>Diversos</figcaption>
+                        <form action="{{route('productscategory.show', 'outros')}}" method="POST">
+                            @csrf   
+                            @method('PUT')
+                            <button class="btn btn-primary" >Buy Now</button>
+                            <input type="hidden" name ="category" value = "outros">
+                        </form>
+                    </label>
+                </figure>
+            </div>
+        </div>
+
+        @endsection
