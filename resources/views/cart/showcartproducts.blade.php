@@ -10,9 +10,11 @@
 
 <div id="wrap">
     <div id="columns" class="columns_4">  
+    <div hidden>{{$check = true}}</div>
     @foreach ($carts as $cart)
     @if(Auth::id() == $cart->user->id)
     @for($i = 0; $i < $cart->quantity; $i++)
+    <div hidden>{{$check = false}}</div>
     <figure>  
          <label class="item">
             <div hidden> {{$j=0}}</div>
@@ -40,10 +42,10 @@
         @endfor
     @endif
     @endforeach
-    @if($carts->isEmpty())
+    @if($check == true)
     <h5 class="text-center">Your cart is empty!</h5>
     @endif
-    @if(!$carts->isEmpty())
+    @if($check == false)
     <a class="button" target="_blank" rel="noopener noreferrer" href="/stripe/">Purchase</a>
     @endif
 

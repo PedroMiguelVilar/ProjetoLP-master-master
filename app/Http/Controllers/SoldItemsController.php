@@ -19,6 +19,9 @@ class SoldItemsController extends Controller
 
     public function shipped(Request $request, PurchasedItems $purchasedItems)
     {
+
+        MailController::status($request);
+
         $purchasedItems = PurchasedItems::all();
         foreach($purchasedItems as $purchasedItem){
             if($purchasedItem->id == $request->id){
