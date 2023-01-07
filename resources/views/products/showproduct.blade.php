@@ -58,15 +58,12 @@ $wishlist=WishlistController::WishlistStatus();
                         <a name="add_to_cart" type="submit" class="btn btn-primary btn-lg">Without Stock</a>
                         @endif
 
-                       <?php
-                        $i=1
-                       ?>
+                        @Auth
+                        <div hidden>{{$i=1}}</div>
                     @foreach($wishlist as $item) 
                     @if($item->user_id == Auth::user()->id && $item->product_id == $product->id)
                         <a name="add_to_wishlist" type="submit" class="btn btn-primary btn-lg">Already Added</a>
-                        <?php
-                        $i=0
-                        ?>
+                        <div hidden>{{$i=0}}</div>
                     @endif
                     @endforeach
 
@@ -78,6 +75,17 @@ $wishlist=WishlistController::WishlistStatus();
                             <button name="add_to_wishlist" type="submit" class="btn btn-primary btn-lg">Add to Wishlist</button>
                         </form>
                     @endif
+                    @endAuth
+
+                    @guest
+                    <form class="add-inputs" action = "/wishlist/add" method="POST">
+                        @csrf
+                        <input name="product_id" type="hidden" value="{{$product->id}}">
+                        <input type="hidden" class="form-control" id="status" name="status" value="1">
+                        <button name="add_to_wishlist" type="submit" class="btn btn-primary btn-lg">Add to Wishlist</button>
+                    </form>
+                    @endguest
+
 
                     <div style="clear:both"></div>
                     <hr>

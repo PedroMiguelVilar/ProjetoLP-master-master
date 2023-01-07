@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
 
-use Illuminate\Notifications\Messages\MailMessage;
 
 class Receipt extends Controller
 {
@@ -17,10 +16,9 @@ class Receipt extends Controller
       // Generate PDF
       public function createPDF() {
         // retreive all records from db
-        $product = Product::all();
+        $data = Product::all();   
         // share data to view
-        view()->share($product);
-        $pdf = Pdf::loadView('receipt', $product->toArray());
-        return $pdf->download('invoice.pdf');
+        $pdf = Pdf::loadview('receipt.receipt');
+      return $pdf->setPaper('a4')->stream("pdf.pdf");
       }
 }
