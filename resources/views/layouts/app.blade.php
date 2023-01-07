@@ -43,7 +43,7 @@ $total=CartController::cartItem();
                     <style>a{text-decoration:none;}</style>
                     <ul class="navbar-nav me-auto">
                     </ul>
-                    
+                    @if(Request::url() === 'http://127.0.0.1:8000' || Route::currentRouteName()=="searchproducts")
                     <meta name="_token" content="{{ csrf_token() }}">
                     <title>Live Search</title>
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -58,7 +58,7 @@ $total=CartController::cartItem();
                         </tbody>
                     </table>
                     <script type="text/javascript"> $('#search').on('keyup', function() { $value = $(this).val(); $.ajax({ type: 'get', url: '{{ URL::to('search') }}', data: { 'search': $value }, success: function(data) { $('tbody').html(data); } }); }) </script>
-                    
+                    @endif
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
