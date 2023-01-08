@@ -146,7 +146,7 @@ class ProductController extends Controller
             if ($id == $cart->user_id) {
                 foreach ($products as $product) {
                     if ($product->id == $cart->product_id) {
-                        if ($product->quantity > 1) {
+                        if ($product->quantity > 0) {
                             $product->quantity -= $cart->quantity;
                             $product->update();
                         }

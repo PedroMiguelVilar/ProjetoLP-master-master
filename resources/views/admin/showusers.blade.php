@@ -41,6 +41,8 @@
                 <input type = "hidden" name = "id" value = "{{$user->role}}">
                 <input type = "hidden" name = "role" value = 1>
             @endif
+        </form>
+        <form action="{{ route('users.update', $user->id) }}" method="POST">
             @csrf   
             @method('PUT')
             @if($user->status == 1)
