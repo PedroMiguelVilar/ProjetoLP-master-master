@@ -29,13 +29,14 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes(['verify' => true]);
 
 Route::get('/',[HomeController::class, 'index'])->name('welcome');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/search',[Search::class, 'search']);
 Route::get('/searchproducts',[Search::class, 'searchpage'])->name('searchproducts');
 Route::get('/showproducts/{product}', [ProductController::class,'show'])->name('products.show');
 Route::put('/showproducts/category/{category}', [ProductController::class,'showcategory'])->name('productscategory.show');
 
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['verified'])->group(function() {
     Route::get('/products', [ProductController::class, 'index'])->name('admin.showproducts')->middleware('Role_Admin');
     Route::get('/users', [HomeController::class, 'showusers'])->name('admin.showusers')->middleware('Role_Admin');
     Route::put('/users/{user}', [HomeController::class, 'update'])->name('users.update')->middleware('Role_Admin');

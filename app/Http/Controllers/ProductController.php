@@ -88,10 +88,14 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        
         $product->update($request->all());
         $images = Image::all();
 
-        return view('editimages', compact('product', 'images'));
+        $product->hide_admin = $request->hide_admin;
+        $product->update();
+        
+        return view('admin.editimages', compact('product', 'images'));
     }
 
 

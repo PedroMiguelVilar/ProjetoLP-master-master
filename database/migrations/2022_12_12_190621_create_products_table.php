@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string("name");
             $table->string("description");
             $table->string("category");
-            $table->string("quantity");
-            $table->string("price");
+            $table->integer("quantity");
+            $table->float("price");
             $table->string("product_url")->default("https://www.clootrack.com/hubfs/Clootrack_Feb2022/images/product-categories.jpg");
             $table->string("hide")->default('no');
             $table->string("hide_admin")->default('no');

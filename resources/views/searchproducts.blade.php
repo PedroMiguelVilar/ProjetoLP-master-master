@@ -32,6 +32,7 @@
 <div id="wrap">
     <div id="columns" class="columns_4">  
     @foreach ($products as $item)
+    @if($item->hide == 'no' && $item->hide_admin == 'no')
     <figure>  
          <label class="item">
             <div hidden> {{$k = 0}}</div>
@@ -51,6 +52,7 @@
             <a class="button" href="/showproducts/{{$item->id}}">Buy Now!</a>
          </label>
         </figure>
+        @endif
     @endforeach
 </div>
 
