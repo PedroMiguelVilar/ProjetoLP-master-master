@@ -87,15 +87,15 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="hide" class="col-md-4 col-form-label text-md-end">{{ __('Hide') }}</label>
+                            <label for="hide_admin" class="col-md-4 col-form-label text-md-end">Hide</label>
                             <div class="col-md-6">
-                                <label  id="hide" for="hide" required autocomplete="hide" class="col-form-label text-md-end">
-                                    <label for="hide"></label>
-                                    <select id="hide" name="hide">
+                                <label  id="hide_admin" for="hide_admin" required autocomplete="hide_admin" class="col-form-label text-md-end">
+                                    <label for="hide_admin"></label>
+                                    <select id="hide_admin" name="hide_admin">
                                       <option value="no">No</option>
                                       <option value="yes">Yes</option>
                                     </select>
-                                @error('hide')
+                                @error('hide_admin')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

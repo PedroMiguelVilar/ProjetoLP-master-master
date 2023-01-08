@@ -43,7 +43,7 @@ $total=CartController::cartItem();
                     <style>a{text-decoration:none;}</style>
                     <ul class="navbar-nav me-auto">
                     </ul>
-                    @if(Request::url() === 'http://127.0.0.1:8000')
+                    @if(Request::url() === 'http://127.0.0.1:8000' || Route::currentRouteName()=="searchproducts")
                     <meta name="_token" content="{{ csrf_token() }}">
                     <title>Live Search</title>
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>

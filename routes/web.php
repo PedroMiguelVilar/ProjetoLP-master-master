@@ -6,9 +6,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\PurchasedItemsController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\SoldItemsController;
+use App\Http\Controllers\Receipt;
 use App\Http\Controllers\Search;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\MailController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -27,11 +29,14 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes(['verify' => true]);
 
 Route::get('/',[HomeController::class, 'index'])->name('welcome');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/search',[Search::class, 'search']);
 Route::get('/searchproducts',[Search::class, 'searchpage'])->name('searchproducts');
 Route::get('/showproducts/{product}', [ProductController::class,'show'])->name('products.show');
+Route::put('/showproducts/category/{category}', [ProductController::class,'showcategory'])->name('productscategory.show');
 
-Route::middleware(['auth'])->group(function() {
+
+Route::middleware(['verified'])->group(function() {
     Route::get('/products', [ProductController::class, 'index'])->name('admin.showproducts')->middleware('Role_Admin');
     Route::get('/users', [HomeController::class, 'showusers'])->name('admin.showusers')->middleware('Role_Admin');
     Route::put('/users/{user}', [HomeController::class, 'update'])->name('users.update')->middleware('Role_Admin');
@@ -65,8 +70,10 @@ Route::middleware(['auth'])->group(function() {
     Route::get('upload-ui', [FileUploadController::class, 'dropzoneUi' ]);
     Route::post('file-upload', [FileUploadController::class, 'dropzoneFileUpload' ])->name('dropzoneFileUpload');
 
+    Route::get('send-mail', [MailController::class, 'index']);
 
-    Route::put('/showproducts/category/{category}', [ProductController::class,'showcategory'])->name('productscategory.show');
+    Route::get('/receipt', [Receipt::class, 'index']);
+    Route::get('/receipt/pdf', [Receipt::class, 'createPDF']);
 
     Route::controller(StripePaymentController::class)->group(function(){
         Route::get('stripe', 'stripe');

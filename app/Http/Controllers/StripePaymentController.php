@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
      
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Session;
 
 use Stripe;
@@ -40,6 +41,7 @@ class StripePaymentController extends Controller
 
         PurchasedItemsController::store();
         ProductController::products_sold();
+        MailController::index();
         CartController::deletecart();
 
         return back();

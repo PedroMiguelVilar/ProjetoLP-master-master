@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wishlist;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,8 @@ class WishlistController extends Controller
     public function showWishList()
     {
         $items = Wishlist::all();
-        return view('wishlist.wishlist', compact('items'));
+        $images = Image::all();
+        return view('wishlist.wishlist', compact('items', 'images'));
     }
 
     static function WishlistStatus()

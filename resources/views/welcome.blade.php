@@ -302,7 +302,7 @@
             @if ($purchased_items->count() < 5)
                 {{ $i = 1 }}
                 @foreach ($products_carousel as $item)
-                    @if ($item->hide == 'no')
+                    @if ($item->hide == 'no' && $item->hide_admin == 'no')
                         <label class="item" for="t-{{ $i }}">
                             <div hidden> {{ $k = 0 }}</div>
                             @foreach ($images as $image)
@@ -335,7 +335,7 @@
                 @foreach ($purchased_items as $item)
                     @foreach ($all_products as $product)
                         @if ($product->id == $item->product_id)
-                            @if ($product->hide == 'no')
+                            @if ($product->hide == 'no' && $product->hide_admin == 'no')
                                 <label class="item" for="t-{{ $i }}">
                                     <div hidden> {{ $k = 0 }}</div>
                                     @foreach ($images as $image)
@@ -382,7 +382,7 @@
     <div id="wrap">
         <div id="columns" class="columns_4">
             @foreach ($products as $item)
-                @if ($item->hide == 'no')
+                @if ($item->hide == 'no' && $item->hide_admin == 'no')
                     <figure>
                         <label class="item" for="t-{{ $item['id'] }}">
                             <div hidden> {{ $j = 0 }}</div>

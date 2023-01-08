@@ -88,10 +88,14 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        
         $product->update($request->all());
         $images = Image::all();
 
-        return view('editimages', compact('product', 'images'));
+        $product->hide_admin = $request->hide_admin;
+        $product->update();
+        
+        return view('admin.editimages', compact('product', 'images'));
     }
 
 
@@ -142,7 +146,7 @@ class ProductController extends Controller
             if ($id == $cart->user_id) {
                 foreach ($products as $product) {
                     if ($product->id == $cart->product_id) {
-                        if ($product->quantity > 1) {
+                        if ($product->quantity > 0) {
                             $product->quantity -= $cart->quantity;
                             $product->update();
                         }
