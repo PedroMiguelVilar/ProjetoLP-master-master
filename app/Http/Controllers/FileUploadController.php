@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 class FileUploadController extends Controller
 {
     /** 
@@ -23,7 +24,9 @@ class FileUploadController extends Controller
     public  function dropzoneFileUpload(Request $request)  
     {
         $products = Product::all();
+
         foreach($products as $product){
+            if($product->user_id == Auth::user()->id)
             $last_product = $product;
         }
         $image = $request->file('file');

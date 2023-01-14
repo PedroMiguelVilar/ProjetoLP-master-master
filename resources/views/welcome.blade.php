@@ -300,10 +300,10 @@
 
 
             @if ($purchased_items->count() < 5)
-                {{ $i = 1 }}
+            <div hidden> {{ $i = 1 }} </div>
                 @foreach ($products_carousel as $item)
                     @if ($item->hide == 'no' && $item->hide_admin == 'no')
-                        <label class="item" for="t-{{ $i }}">
+                        <label class="item" for="t-{{ $i }}" >
                             <div hidden> {{ $k = 0 }}</div>
                             @foreach ($images as $image)
                                 @if ($image->product_id == $item->id)

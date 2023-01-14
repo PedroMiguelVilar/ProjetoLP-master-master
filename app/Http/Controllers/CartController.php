@@ -23,7 +23,7 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    static function cartItem()
+    public static function cartItem()
     {
         if (Auth::check()) {
             $userId = Auth::user()->id;
@@ -56,7 +56,7 @@ class CartController extends Controller
         return redirect('cart/show');
     }
 
-    static function order()
+    public static function order()
     {
         $carts = Cart::all();
         $id = Auth::user()->id;
@@ -72,7 +72,7 @@ class CartController extends Controller
 
     }
 
-    static function deletecart(){
+    public static function deletecart(){
 
         $id = Auth::user()->id;
         $carts = Cart::all();
