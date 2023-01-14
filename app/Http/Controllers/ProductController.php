@@ -135,7 +135,7 @@ class ProductController extends Controller
         
     }
 
-    static function products_sold()
+    public static function products_sold()
     {
 
         $id = Auth::id();
