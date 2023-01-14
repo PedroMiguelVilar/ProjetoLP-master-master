@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class MailController extends Controller
 {
-    static function index()
+    public static function index()
     {
         $details = [
             'title' => 'Mail from SellHighBuyLow.com',
@@ -30,7 +30,7 @@ class MailController extends Controller
 
     }
 
-    static function status(Request $request)
+    public static function status(Request $request)
     {
 
         $products = PurchasedItems::all();

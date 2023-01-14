@@ -21,7 +21,7 @@ class PurchasedItemsController extends Controller
         return view('products.purchaseditems', compact('products', 'id'));
     }
 
-    static function store(){
+    public static function store(){
 
         $carts = Cart::all();
         $id = Auth::user()->id;
@@ -39,7 +39,7 @@ class PurchasedItemsController extends Controller
 
     }
  
-    public function received(Request $request, PurchasedItems $purchasedItems)
+    public function received(Request $request)
     {
         $purchasedItems = PurchasedItems::all();
         foreach($purchasedItems as $purchasedItem){

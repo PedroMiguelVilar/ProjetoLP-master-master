@@ -28,7 +28,7 @@ class WishlistController extends Controller
         return view('wishlist.wishlist', compact('items', 'images'));
     }
 
-    static function WishlistStatus()
+    public static function WishlistStatus()
     {
 
         $items = Wishlist::all();

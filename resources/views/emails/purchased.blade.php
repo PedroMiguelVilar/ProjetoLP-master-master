@@ -21,7 +21,7 @@ $total=CartController::order();
     <div hidden>{{$check = false}}</div>
     @foreach ($carts as $cart)
     @if(Auth::id() == $cart->user->id)
-    <div hidden>{{$check = true}}</div>
+    
     @for($i = 0; $i < $cart->quantity; $i++)
         <figure>  
          <label class="item">
@@ -33,8 +33,8 @@ $total=CartController::order();
     @endif
     @endforeach
 
-    @if($check == true)
+   
     <span>Total = {{$total}}</span>
-    @endif
+    
 </body>
 </html>
